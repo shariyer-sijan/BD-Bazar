@@ -105,7 +105,7 @@ export default function Allprice() {
         </div>
       </div>
 
-      {/* প্রোডাক্ট কার্ডের গ্রিড */}
+   
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sortedProducts.map((x, i) => {
           const isUp = x.change?.dir === "up";
@@ -117,10 +117,10 @@ export default function Allprice() {
               key={x.id || i}
               className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col justify-between hover:shadow-md transition-shadow duration-200"
             >
-              {/* কার্ডের উপরের অংশ: আইকন, নাম ও ইউনিট */}
+    
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl">
-                  {x.categoryIcon || x.image || "📦"}
+                  {x.image}
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 leading-snug">
@@ -132,7 +132,7 @@ export default function Allprice() {
                 </div>
               </div>
 
-              {/* কার্ডের নিচের অংশ: আজকের দাম এবং পার্সেন্টিজ ব্যাজ */}
+  
               <div className="flex items-end justify-between border-t border-gray-50 pt-4">
                 <div>
                   <p className="text-xs text-gray-400 mb-1">আজকের দাম</p>
@@ -141,7 +141,7 @@ export default function Allprice() {
                   </div>
                 </div>
 
-                {/* ডিরেকশন অনুযায়ী ব্যাজ (আপ, ডাউন বা সমান) */}
+            
                 <div
                   className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold ${
                     isUp

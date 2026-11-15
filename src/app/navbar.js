@@ -3,9 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Timekoto from "./Timekoto";
 
-export default function Navv() {
+export default async function Navv() {
+
+   const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
+  const data = await res.json();
+  
   return (
-    <header className="w-full bg-white border-b border-gray-100">
+    <div className=" sticky top-0 z-50 bg-white ">
+       <header className="w-full border-b border-gray-100">
       <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 justify-between">
         <div className="flex items-center gap-3.5">
           <div className="w-12 h-12 rounded-2xl bg-[#008037] flex items-center justify-center shadow-sm shrink-0">
@@ -47,5 +52,18 @@ export default function Navv() {
       </div>
     </header>
   
+  <div className='border-b border-gray-100  py-2 '>
+            <div  className='flex max-w-6xl mx-auto'>
+            {
+                data.map( (x,i)=>(
+                    <div key={i} className='mx-2'>
+                        <span>{x.icon}</span>
+                        <span>{x.nameBn}</span>
+                        </div>
+                ))
+            }
+        </div>
+        </div>
+    </div>
   );
 }

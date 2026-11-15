@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import Gura from "./Gura";
-import Nav2 from "./nav2";
 import Banner from "./Banner";
 import Priceup from "./Priceup";
 import Pricedown from "./Pricedown";
@@ -11,9 +10,7 @@ export default function Home() {
   return (
     <div>
 
-      <Suspense fallback={<div className="text-center py-4 text-gray-500 font-medium">লোড হচ্ছে...</div>}>
-        <Nav2 />
-      </Suspense>
+     
       <Suspense fallback={<div className="text-center py-4 text-gray-500 font-medium">লোড হচ্ছে...</div>}>
         <Gura />
       </Suspense>

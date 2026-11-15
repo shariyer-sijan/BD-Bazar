@@ -2,6 +2,7 @@ import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import Navv from "./navbar";
 import Footer from "./footer";
+import { Suspense } from "react";
 
 const hind = Hind_Siliguri({
   subsets: ["latin","bengali"],
@@ -22,7 +23,10 @@ export default function RootLayout({ children }) {
       className={`${hind.className}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <div> <Navv></Navv> </div>
+         
+         <Suspense fallback={<div className="text-center py-4 text-gray-500 font-medium">লোড হচ্ছে...</div>}>
+        <Navv></Navv>
+      </Suspense>
         {children}
         <div><Footer></Footer></div>
         </body>
