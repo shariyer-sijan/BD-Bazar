@@ -1,15 +1,13 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
+import Navv from "./navbar";
+import Footer from "./footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const hind = Hind_Siliguri({
+  subsets: ["latin","bengali"],
+  weight: ['400', '700'],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Create Next App",
@@ -17,12 +15,17 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="en" data-theme="light"
+      className={`${hind.className}  h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <div> <Navv></Navv> </div>
+        {children}
+        <div><Footer></Footer></div>
+        </body>
     </html>
   );
 }

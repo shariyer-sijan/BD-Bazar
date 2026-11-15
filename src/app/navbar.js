@@ -1,0 +1,51 @@
+
+import Image from "next/image";
+import Link from "next/link";
+import Timekoto from "./Timekoto";
+
+export default function Navv() {
+  return (
+    <header className="w-full bg-white border-b border-gray-100">
+      <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 justify-between">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-2xl bg-[#008037] flex items-center justify-center shadow-sm shrink-0">
+            <Image
+              src="/logo-icon.png" 
+              alt="বাজার দর লোগো"
+              width={26}
+              height={26}
+              className="object-contain brightness-150 contrast-125"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Link href="/" className="text-2xl font-bold text-[#1f2937] leading-tight">
+              বাজার দর
+            </Link>
+            <span className="text-xs sm:text-sm text-gray-500 mt-0.5 min-h-[20px]">
+              <Timekoto></Timekoto>
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <Link
+            href="/signin"
+            className="text-base font-bold text-[#1f2937] hover:text-[#008037] transition-colors"
+          >
+            সাইন ইন
+          </Link>
+
+          <Link
+            href="/signup"
+            className="btn bg-[#008037] hover:bg-[#006b2e] text-white font-bold text-base px-6 h-11 min-h-0 rounded-xl border-none shadow-md"
+          >
+            সাইন আপ
+          </Link>
+        </div>
+
+      </div>
+    </header>
+  
+  );
+}
