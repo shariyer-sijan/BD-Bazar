@@ -2,11 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import Timekoto from "./Timekoto";
+import Navsign from "./navsign";
 
 export default async function Navv() {
 
    const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
   const data = await res.json();
+
+ 
   
   return (
     <div className=" sticky top-0 z-50 bg-white ">
@@ -33,21 +36,8 @@ export default async function Navv() {
           </div>
         </div>
 
-        <div className="flex items-center gap-6">
-          <Link
-            href="/signin"
-            className="text-base font-bold text-[#1f2937] hover:text-[#008037] transition-colors"
-          >
-            সাইন ইন
-          </Link>
 
-          <Link
-            href="/signup"
-            className="btn bg-[#008037] hover:bg-[#006b2e] text-white font-bold text-base px-6 h-11 min-h-0 rounded-xl border-none shadow-md"
-          >
-            সাইন আপ
-          </Link>
-        </div>
+        <Navsign></Navsign>
 
       </div>
     </header>

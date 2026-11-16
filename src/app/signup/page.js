@@ -1,9 +1,28 @@
+"use client"
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function SignUpPage() {
+
+    const onSubmit= async(e)=>{
+        e.preventDefault();
+        const formdata=new FormData(e.target) 
+        const user=Object.fromEntries(formdata.entries())
+        
+        const {data,error}= await authClient.signUp.email( {...user , callbackURL:"/"})
+
+        if(data){
+            redirect("/")
+        }
+        if(error){
+           
+            console.log(error)
+        }
+    }
   return (
     <div className="min-h-screen bg-[#f4f7f4] flex flex-col items-center justify-center px-4 py-12">
-      {/* উপরের হেডিং */}
+    
       <div className="text-center mb-6">
         <h1 className="text-3xl font-extrabold text-gray-900">
           অ্যাকাউন্ট তৈরি করুন
@@ -13,10 +32,9 @@ export default function SignUpPage() {
         </p>
       </div>
 
-      {/* সাদা কার্ড ফর্ম কন্টেইনার */}
       <div className="w-full max-w-[440px] bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8">
-        <form className="space-y-4">
-          {/* নাম */}
+        <form className="space-y-4" onSubmit={onSubmit}>
+    
           <div>
             <label className="block text-sm font-bold text-gray-800 mb-1.5">
               নাম
@@ -29,7 +47,6 @@ export default function SignUpPage() {
             />
           </div>
 
-          {/* ইমেইল */}
           <div>
             <label className="block text-sm font-bold text-gray-800 mb-1.5">
               ইমেইল
@@ -42,7 +59,6 @@ export default function SignUpPage() {
             />
           </div>
 
-          {/* পাসওয়ার্ড */}
           <div>
             <label className="block text-sm font-bold text-gray-800 mb-1.5">
               পাসওয়ার্ড
@@ -55,7 +71,6 @@ export default function SignUpPage() {
             />
           </div>
 
-          {/* পাসওয়ার্ড নিশ্চিত করুন */}
           <div>
             <label className="block text-sm font-bold text-gray-800 mb-1.5">
               পাসওয়ার্ড নিশ্চিত করুন
@@ -68,7 +83,6 @@ export default function SignUpPage() {
             />
           </div>
 
-          {/* সাবমিট বাটন */}
           <button
             type="submit"
             className="btn bg-[#008037] hover:bg-[#006b2e] text-white w-full mt-2 border-none shadow-sm text-base font-bold min-h-11 h-11 rounded-xl"
@@ -77,7 +91,6 @@ export default function SignUpPage() {
           </button>
         </form>
 
-        {/* ডিভাইডার */}
         <div className="relative flex py-5 items-center">
           <div className="flex-grow border-t border-gray-200"></div>
           <span className="flex-shrink mx-3 text-xs text-gray-500 font-medium">
@@ -86,7 +99,6 @@ export default function SignUpPage() {
           <div className="flex-grow border-t border-gray-200"></div>
         </div>
 
-        {/* সোশ্যাল বাটনগুলো */}
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
