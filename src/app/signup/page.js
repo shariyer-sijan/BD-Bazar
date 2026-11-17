@@ -3,6 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { toast } from "react-toastify";
 export default function SignUpPage() {
 
     const onSubmit= async(e)=>{
@@ -16,7 +17,7 @@ export default function SignUpPage() {
             redirect("/")
         }
         if(error){
-           
+            toast.error(error.message );
             console.log(error)
         }
     }

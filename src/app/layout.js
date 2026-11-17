@@ -3,6 +3,8 @@ import "./globals.css";
 import Navv from "./navbar";
 import Footer from "./footer";
 import { Suspense } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const hind = Hind_Siliguri({
   subsets: ["latin","bengali"],

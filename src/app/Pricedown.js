@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import React from 'react';
+import Card from './Card';
 
 const Pricedown = async () => {
 
@@ -19,42 +21,8 @@ const Pricedown = async () => {
 
       {/* কার্ডগুলোর গ্রিড */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {topDownProducts.map((x, i) => (
-          <div
-            key={i}
-            className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col justify-between hover:shadow-md transition-shadow duration-200"
-          >
-            {/* কার্ডের উপরের অংশ: আইকন, নাম ও ইউনিট */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl">
-                {x.image }
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 leading-snug">
-                  {x.nameBn}
-                </h3>
-                <p className="text-sm text-gray-500 mt-0.5">
-                  প্রতি {x.unit === "kg" ? "কেজি" : x.unit === "liter" ? "লিটার" : x.unit === "dozen" ? "ডজন" : "পিস"}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-end justify-between border-t border-gray-50 pt-4">
-              <div>
-                <p className="text-xs text-gray-400 mb-1">আজকের দাম</p>
-                <div className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-                  {x.today} <span className="text-base font-normal text-gray-600">টাকা</span>
-                </div>
-              </div>
-
-            
-              <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-green-50 text-green-600 text-xs font-bold">
-                <span>▼</span>
-                <span>{Math.abs(x.change.pct)}%</span>
-              </div>
-            </div>
-            
-          </div>
+        {topDownProducts.map((product) => (
+          <Card key={product.id } product={product} />
         ))}
       </div>
 

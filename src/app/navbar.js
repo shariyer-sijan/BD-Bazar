@@ -46,10 +46,12 @@ export default async function Navv() {
             <div  className='flex max-w-6xl mx-auto'>
             {
                 data.map( (x,i)=>(
-                    <div key={i} className='mx-2'>
+                   <Link key={x.id} href={`/category/${x.id}`}>
+                     <div className='mx-2'>
                         <span>{x.icon}</span>
                         <span>{x.nameBn}</span>
-                        </div>
+                    </div>
+                   </Link>
                 ))
             }
         </div>

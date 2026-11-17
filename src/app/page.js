@@ -3,7 +3,7 @@ import Gura from "./Gura";
 import Banner from "./Banner";
 import Priceup from "./Priceup";
 import Pricedown from "./Pricedown";
-import Allprice from "./Allprice";
+import Allapi from "./Allapi";
 
 export default function Home() {
 
@@ -24,7 +24,7 @@ export default function Home() {
       </Suspense>
 
       <Suspense fallback={<div className="text-center py-4 text-gray-500 font-medium">লোড হচ্ছে...</div>}>
-        <Allprice></Allprice>
+        <Allapi></Allapi>
       </Suspense>
     </div>
   );
