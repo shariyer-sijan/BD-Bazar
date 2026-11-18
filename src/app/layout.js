@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       className={`${hind.className}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-         
+         <ToastContainer position="top-right" autoClose={3000} />
          <Suspense fallback={<div className="text-center py-4 text-gray-500 font-medium">লোড হচ্ছে...</div>}>
         <Navv></Navv>
       </Suspense>
