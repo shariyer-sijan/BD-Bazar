@@ -1,3 +1,4 @@
+import Gura from "./Gura";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import Navv from "./navbar";
@@ -28,6 +29,9 @@ export default function RootLayout({ children }) {
          
          <Suspense fallback={<div className="text-center py-4 text-gray-500 font-medium">লোড হচ্ছে...</div>}>
         <Navv></Navv>
+      </Suspense>
+      <Suspense fallback={<div className="text-center py-4 text-gray-500 font-medium">লোড হচ্ছে...</div>}>
+        <Gura />
       </Suspense>
         {children}
         <div><Footer></Footer></div>

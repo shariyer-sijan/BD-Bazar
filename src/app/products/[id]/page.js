@@ -9,7 +9,7 @@ const ProductDetailsContent = async ({ params }) => {
   const data = await res.json();
  
   const {
-    nameBn = "নাম পাওয়া যায়নি",
+    nameBn = "নাম পাওয়া যায়নি",
     categoryNameBn = "ক্যাটাগরি",
     categoryIcon = "🥔",
     today = 0,
@@ -26,7 +26,7 @@ const ProductDetailsContent = async ({ params }) => {
       <div className="text-xs text-gray-500 mb-4 flex items-center gap-1.5">
         <Link href="/" className="hover:text-gray-800">হোম</Link>
         <span>›</span>
-        <span>{categoryNameBn}</span>
+        <Link href={`/category/${data.category}`}>{categoryNameBn}</Link>
         <span>›</span>
         <span className="text-gray-900 font-bold">{nameBn}</span>
       </div>
@@ -41,7 +41,7 @@ const ProductDetailsContent = async ({ params }) => {
             <h1 className="text-2xl font-extrabold text-gray-900">{nameBn}</h1>
             <p className="text-xs text-gray-500 mt-0.5">প্রতি {unit === "kg" ? "কেজি" : unit} · {categoryNameBn}</p>
             <p className={`text-xs font-medium mt-1 ${change?.dir === "up" ? "text-red-600" : "text-emerald-600"}`}>
-              গতকালের তুলনায় আজ দাম {change?.dir === "up" ? "বেড়েছে" : "কমেছে"} {change?.pct}%
+              গতকালের তুলনায় আজ দাম {change?.dir === "up" ? "বেড়েছে" : "কমেছে"} {change?.pct}%
             </p>
           </div>
         </div>
@@ -61,23 +61,25 @@ const ProductDetailsContent = async ({ params }) => {
         <h2 className="text-base font-extrabold text-gray-900 mb-3">দামের সারসংক্ষেপ</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
-            <span className="text-xs text-gray-500 block">গতকালের দাম</span>
-            <span className="text-xl font-black text-gray-900 mt-1 block">{yesterday} টাকা</span>
-            <span className="text-[11px] text-gray-400 mt-0.5 block">তুলনামূলক পূর্বের মূল্য</span>
-          </div>
-
-          <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
-            <span className="text-xs text-gray-500 block">আজকের দাম</span>
-            <span className="text-xl font-black text-gray-900 mt-1 block">{today} টাকা</span>
-            <span className="text-[11px] text-gray-400 mt-0.5 block">বর্তমান বাজারদর</span>
-          </div>
-
-          <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
-            <span className="text-xs text-gray-500 block">পরিবর্তন</span>
-            <span className={`text-xl font-black mt-1 block ${change?.dir === "up" ? "text-red-600" : "text-emerald-600"}`}>
-              {change?.dir === "up" ? "+" : "-"}{change?.pct}%
+            <span className="text-xs text-gray-500 block">সর্বনিম্ন দাম</span>
+            <span className="text-xl font-black text-emerald-600 mt-1 block">
+              {markets.length > 0 ? Math.min(...markets.map(m => m.min)) : 0} টাকা
             </span>
-            <span className="text-[11px] text-gray-400 mt-0.5 block">বাজারের তারতম্য</span>
+            <span className="text-[11px] text-gray-400 mt-0.5 block">সবচেয়ে কম দামের বাজার</span>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
+            <span className="text-xs text-gray-500 block">সর্বাধিক দাম</span>
+            <span className="text-xl font-black text-red-600 mt-1 block">
+              {markets.length > 0 ? Math.max(...markets.map(m => m.max)) : 0} টাকা
+            </span>
+            <span className="text-[11px] text-gray-400 mt-0.5 block">সবচেয়ে বেশি দামের বাজার</span>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
+            <span className="text-xs text-gray-500 block">গড় দাম</span>
+            <span className="text-xl font-black text-gray-900 mt-1 block">{today} টাকা</span>
+            <span className="text-[11px] text-gray-400 mt-0.5 block">প্রতি কেজি-এর হিসেবে</span>
           </div>
         </div>
       </div>
@@ -92,22 +94,27 @@ const ProductDetailsContent = async ({ params }) => {
                 <th className="bg-transparent">বাজার</th>
                 <th className="bg-transparent">বিভাগ</th>
                 <th className="bg-transparent">সর্বনিম্ন</th>
-                <th className="bg-transparent text-right">সর্বাধিক</th>
+                <th className="bg-transparent">সর্বাধিক</th>
+                <th className="bg-transparent text-right">গড়</th>
               </tr>
             </thead>
             <tbody>
               {markets.length > 0 ? (
-                markets.map((m, index) => (
-                  <tr key={index} className="border-b border-gray-50 hover:bg-gray-50 text-gray-800">
-                    <td className="font-bold">{m.market}</td>
-                    <td>{m.division}</td>
-                    <td>{m.min} টাকা</td>
-                    <td className="text-right font-medium">{m.max} টাকা</td>
-                  </tr>
-                ))
+                markets.map((m, index) => {
+                  const avgPrice = ((m.min + m.max) / 2).toFixed(2);
+                  return (
+                    <tr key={index} className="border-b border-gray-50 hover:bg-gray-50 text-gray-800">
+                      <td className="font-bold">{m.market}</td>
+                      <td>{m.division}</td>
+                      <td>{m.min} টাকা</td>
+                      <td>{m.max} টাকা</td>
+                      <td className="text-right font-medium">{avgPrice} টাকা</td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
-                  <td colSpan="4" className="text-center text-gray-400 py-4">কোনো বাজার ডেটা পাওয়া যায়নি</td>
+                  <td colSpan="5" className="text-center text-gray-400 py-4">কোনো বাজার ডেটা পাওয়া যায়নি</td>
                 </tr>
               )}
             </tbody>
@@ -117,16 +124,17 @@ const ProductDetailsContent = async ({ params }) => {
 
       {/* ব্যাক লিংক */}
       <div>
-        <Link href="/" className="text-xs font-bold text-[#008037] underline flex items-center gap-1">
-          <span>🌿</span>
-          <span>হোমে ফিরে যান</span>
+        <Link href={`/category/${data.category}`} className="text-xs font-bold underline flex items-center gap-1">
+          <span>{categoryIcon}</span>
+          <span> সব </span>
+          <span> {categoryNameBn}</span>
         </Link>
       </div>
     </div>
   );
 };
 
-// ২. মূল পেজ কম্পোনেন্ট যেখানে Suspense দিয়ে র‍্যাপ করা হয়েছে
+// ২. মূল পেজ কম্পোনেন্ট যেখানে Suspense দিয়ে র‍্যাপ করা হয়েছে
 const Page = ({ params }) => {
   return (
     <div className="min-h-screen bg-[#f4f7f4] px-4 py-8 flex flex-col items-center">
