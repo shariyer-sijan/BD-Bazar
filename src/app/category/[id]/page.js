@@ -1,5 +1,6 @@
 import Card from '@/app/Card';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import React, { Suspense } from 'react';
 
 const Lodata = async ({ params, searchParams }) => {
@@ -7,10 +8,13 @@ const Lodata = async ({ params, searchParams }) => {
   const resolvedSearchParams = await searchParams;
   const sortBy = resolvedSearchParams?.sort || "default";
 
-  // ক্যাটাগরি অনুযায়ী প্রোডাক্ট ফেচ করা
   const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products?category=${id}`);
   const products = await res.json();
  
+  if(products.length===0){
+    notFound()
+  }
+
   const sortedProducts = [...products].sort((a, b) => {
     if (sortBy === "low-to-high") return a.today - b.today;
     if (sortBy === "high-to-low") return b.today - a.today;

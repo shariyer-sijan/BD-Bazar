@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 // ১. ডেটা ফেচিং ও ইউআই কম্পোনেন্ট (এটি Suspense-এর ভেতরে থাকবে)
@@ -7,7 +8,10 @@ const ProductDetailsContent = async ({ params }) => {
 
   const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products/${id}`);
   const data = await res.json();
- 
+
+  if( data.error==="Not found"){
+    notFound()
+  }
   const {
     nameBn = "নাম পাওয়া যায়নি",
     categoryNameBn = "ক্যাটাগরি",
