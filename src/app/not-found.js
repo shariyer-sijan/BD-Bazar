@@ -1,9 +1,9 @@
+
 import Link from "next/link";
 
 const NotFound = () => {
     return (
         <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center bg-white">
-
             <h1 className="text-8xl sm:text-9xl font-extrabold text-[#008037]">
                 404
             </h1>
@@ -23,7 +23,6 @@ const NotFound = () => {
             >
                 ← হোম পেজে ফিরে যান
             </Link>
-
         </div>
     );
 };

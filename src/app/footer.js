@@ -1,8 +1,9 @@
+
 export default function Footer() {
   return (
     <footer className="w-full bg-white border-t border-gray-100 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-4">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-sm text-gray-500 gap-3 sm:gap-4 text-center sm:text-left">
+
         <div>
           বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।
         </div>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { toast } from "react-toastify";
@@ -15,7 +16,6 @@ const Page = () => {
     const [name, setName] = useState(user?.name || "");
     const [loading, setLoading] = useState(false);
 
-    // নাম আপডেট
     const handleUpdateName = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -40,7 +40,6 @@ const Page = () => {
         }
     };
 
-    // Sign out
     const handleSignOut = async () => {
         await authClient.signOut();
         router.push("/");
@@ -49,18 +48,17 @@ const Page = () => {
 
     if (isPending) {
         return (
-            <div className="min-h-screen bg-[#f0f5f1] flex items-center justify-center">
+            <div className="min-h-screen bg-[#f0f5f1] flex items-center justify-center px-4">
                 <p className="text-gray-500 font-medium">লোড হচ্ছে...</p>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#f0f5f1] px-4 py-8 sm:py-12 flex flex-col items-center">
+        <div className="min-h-screen bg-[#f0f5f1] px-3 sm:px-4 py-6 sm:py-8 md:py-12 flex flex-col items-center">
 
             <div className="w-full max-w-[540px]">
 
-                {/* Heading */}
                 <div className="mb-5">
                     <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900">
                         আমার প্রোফাইল
@@ -71,13 +69,11 @@ const Page = () => {
                     </p>
                 </div>
 
-                {/* Profile Card */}
-                <div className="bg-[#fafcfb] rounded-2xl border border-[#e3ebe5] p-4 sm:p-5 flex items-center justify-between gap-3 mb-4">
+                <div className="bg-[#fafcfb] rounded-2xl border border-[#e3ebe5] p-3 sm:p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
 
                     <div className="flex items-center gap-3 min-w-0">
 
-                        {/* Avatar - আগের মতোই */}
-                        <div className="w-14 h-14 rounded-2xl bg-[#008037] text-white font-bold text-lg flex items-center justify-center uppercase shrink-0 shadow-sm">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#008037] text-white font-bold text-lg flex items-center justify-center uppercase shrink-0 shadow-sm">
                             {user?.name?.charAt(0) || "u"}
                         </div>
 
@@ -92,20 +88,18 @@ const Page = () => {
                         </div>
                     </div>
 
-                    {/* Sign Out */}
                     <button
                         onClick={handleSignOut}
-                        className="border border-red-400 hover:bg-red-50 text-red-600 font-medium text-xs px-3 py-2 rounded-lg transition-colors cursor-pointer flex items-center gap-1 shrink-0"
+                        className="border border-red-400 hover:bg-red-50 text-red-600 font-medium text-xs px-3 py-2 rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-1 shrink-0 w-full sm:w-auto"
                     >
                         <span>↩</span>
                         <span>সাইন আউট</span>
                     </button>
                 </div>
 
-                {/* Information Card */}
-                <div className="bg-[#fafcfb] rounded-2xl border border-[#e3ebe5] p-5 sm:p-6">
+                <div className="bg-[#fafcfb] rounded-2xl border border-[#e3ebe5] p-4 sm:p-6">
 
-                    <h3 className="font-bold text-gray-900 text-sm mb-6">
+                    <h3 className="font-bold text-gray-900 text-sm mb-5 sm:mb-6">
                         তথ্য
                     </h3>
 
@@ -136,7 +130,6 @@ const Page = () => {
                     </form>
                 </div>
 
-                {/* Home Link */}
                 <div className="mt-5 text-center">
                     <Link
                         href="/"
